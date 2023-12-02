@@ -3,6 +3,8 @@
 /// <reference types="Cypress" />
 /// <reference types="cypress-iframe" />
 import 'cypress-iframe'
+import HomePage from '../pageObjects/HomePage'
+import ProductPage from '../pageObjects/ProductPage'
 describe('Frames Example', function() 
 {
     before(function(){
@@ -15,17 +17,23 @@ describe('Frames Example', function()
 
     it('Demo Example', function() 
     {
+        const homepage = new HomePage()
+        const productpage = new ProductPage()
         cy.visit("https://rahulshettyacademy.com/angularpractice/")
-        cy.get("input[name='name']:nth-child(2)").type(this.data.name)
-        cy.get('select').select(this.data.gender).should('have.value','Male')
-        cy.get(":nth-child(4) > .ng-pristine").should('have.value', this.data.name)
-        cy.get("input[name='name']:nth-child(2)").should('have.attr','minlength','2')
-        cy.get("#inlineRadio3").should('be.disabled')
-        cy.get(':nth-child(2) > .nav-link').click()
+        homepage.getEditBox().type(this.data.name)
+        homepage.getGender().select(this.data.gender).should('have.value','Male')
+        homepage.getTwoWayDataBinding().should('have.value', this.data.name)
+        homepage.getEditBox().should('have.attr','minlength','2')
+        homepage.getEntreprenuer().should('be.disabled')
+        // used to debug and stop the execution
+        //cy.pause()
+        homepage.getShopTab().click()
         this.data.productName
 
         this.data.productName.forEach(function(element) {
             cy.selectProduct(element)      
         });
+
+        productpage.getCheckOutButton().click()
     })
 })
