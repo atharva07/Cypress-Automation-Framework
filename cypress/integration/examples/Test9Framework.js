@@ -36,6 +36,27 @@ describe('Frames Example', function()
 
         productpage.getCheckOutButton().click()
         
+        var sum = 0
+        cy.get("tr td:nth-child(4) strong").each(($el, index, $list) => {
+            const actualPrice = $el.text()
+            var res = actualPrice.split(" ")
+            res = res[1].trim()
+            sum = Number(sum) + Number(res)
+            cy.log(res)
+        }).then(function()
+        {
+            cy.log(sum)
+        })
+        
+        // fetching total bill from the UI
+        cy.get("h3 strong").then(function(element)
+        {
+            const totalPrice = element.text()
+            var res = totalPrice.split(" ")
+            var total = res[1].trim()
+            expect(Number(total)).to.equal(sum)
+        })
+
         // checkout code
         cy.contains("Checkout").click()
         cy.get("#country").type("India")
