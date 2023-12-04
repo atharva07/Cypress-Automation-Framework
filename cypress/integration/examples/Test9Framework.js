@@ -28,12 +28,17 @@ describe('Frames Example', function()
         // used to debug and stop the execution
         //cy.pause()
         homepage.getShopTab().click()
-        this.data.productName
+        Cypress.config("defaultCommandTimeout", 8000)
 
         this.data.productName.forEach(function(element) {
             cy.selectProduct(element)      
         });
 
         productpage.getCheckOutButton().click()
+        
+        // checkout code
+        cy.contains("Checkout").click()
+        cy.get("#country").type("India")
+        cy.get(".suggestions > ul > li > a").click()
     })
 })
