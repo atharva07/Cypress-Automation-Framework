@@ -5,6 +5,7 @@
 import 'cypress-iframe'
 import HomePage from '../pageObjects/HomePage'
 import ProductPage from '../pageObjects/ProductPage'
+
 describe('Frames Example', function() 
 {
     before(function(){
@@ -17,9 +18,10 @@ describe('Frames Example', function()
 
     it('Demo Example', function() 
     {
+        //cy.once('uncaught:exception', () => false)
         const homepage = new HomePage()
         const productpage = new ProductPage()
-        cy.visit("https://rahulshettyacademy.com/angularpractice/")
+        cy.visit(Cypress.env("url")+'/angularpractice/')
         homepage.getEditBox().type(this.data.name)
         homepage.getGender().select(this.data.gender).should('have.value','Male')
         homepage.getTwoWayDataBinding().should('have.value', this.data.name)
@@ -60,7 +62,7 @@ describe('Frames Example', function()
         // checkout code
         cy.contains("Checkout").click()
         cy.get("#country").type("India")
-        Cypress.config("defaultCommandTimeout", 8000)
+        Cypress.config("defaultCommandTimeout", 10000)
         cy.get(".suggestions > ul > li > a").click()
         cy.get(".checkbox").click()
         cy.get("input[type='submit']").click()
