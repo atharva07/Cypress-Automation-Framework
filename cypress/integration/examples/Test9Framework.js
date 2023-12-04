@@ -28,7 +28,7 @@ describe('Frames Example', function()
         // used to debug and stop the execution
         //cy.pause()
         homepage.getShopTab().click()
-        Cypress.config("defaultCommandTimeout", 8000)
+        
 
         this.data.productName.forEach(function(element) {
             cy.selectProduct(element)      
@@ -39,6 +39,15 @@ describe('Frames Example', function()
         // checkout code
         cy.contains("Checkout").click()
         cy.get("#country").type("India")
+        Cypress.config("defaultCommandTimeout", 8000)
         cy.get(".suggestions > ul > li > a").click()
+        cy.get(".checkbox").click()
+        cy.get("input[type='submit']").click()
+        //cy.get("alert").should("have.text","Success! Thank you! Your order will be delivered in next few weeks :-).")
+        cy.get(".alert").then(function(element)
+        {
+            const actualText = element.text()
+            expect(actualText.includes("Success")).to.be.true
+        })
     })
 })
