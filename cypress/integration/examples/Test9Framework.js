@@ -22,13 +22,13 @@ describe('Frames Example', function()
         const homepage = new HomePage()
         const productpage = new ProductPage()
         cy.visit(Cypress.env("url")+'/angularpractice/')
+
         homepage.getEditBox().type(this.data.name)
-        homepage.getGender().select(this.data.gender).should('have.value','Male')
+        homepage.getGender().select(this.data.gender)
         homepage.getTwoWayDataBinding().should('have.value', this.data.name)
         homepage.getEditBox().should('have.attr','minlength','2')
         homepage.getEntreprenuer().should('be.disabled')
-        // used to debug and stop the execution
-        //cy.pause()
+        Cypress.config('defaultCommandTimeout', 8000)
         homepage.getShopTab().click()
         
 

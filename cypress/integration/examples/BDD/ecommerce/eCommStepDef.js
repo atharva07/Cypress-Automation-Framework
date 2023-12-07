@@ -15,7 +15,7 @@ When('I add items to cart', () =>
     productpage.getCheckOutButton().click()
 })
 
-And('Validate the total prices', () =>
+Then('Validate the total prices', () =>
 {
     cy.get("tr td:nth-child(4) strong").each(($el, index, $list) => {
         const actualPrice = $el.text()
@@ -54,4 +54,21 @@ Then('select the country submit and verfify Thankyou', () =>
     })
 })
 
+When('I fill the form details', function() 
+{
+    homepage.getEditBox().type(this.data.name)
+    homepage.getGender().select(this.data.gender)
+})
 
+Then('validate the forms behaviour', function() 
+{
+    homepage.getTwoWayDataBinding().should('have.value', this.data.name)
+    homepage.getEditBox().should('have.attr','minlength','2')
+    homepage.getEntreprenuer().should('be.disabled')
+    Cypress.config('defaultCommandTimeout', 8000)
+})
+
+Then('select the Shop page', () => 
+{
+    homepage.getShopTab().click()
+})
