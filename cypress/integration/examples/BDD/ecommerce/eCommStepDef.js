@@ -1,5 +1,9 @@
-import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import { DataTable, Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import HomePage from '../../integration/pageObjects/HomePage';
+import ProductPage from '../../integration/pageObjects/ProductPage';
 
+const homePage=new HomePage()
+const productPage=new ProductPage()
 Given('I open Ecommerce page', () =>
 {
     cy.visit(Cypress.env("url")+'/angularpractice/')
@@ -7,12 +11,12 @@ Given('I open Ecommerce page', () =>
 
 When('I add items to cart', () => 
 {
-    homepage.getShopTab().click()
+    homePage.getShopTab().click()
     this.data.productName.forEach(function(element) {
         cy.selectProduct(element)      
     });
 
-    productpage.getCheckOutButton().click()
+    productPage.getCheckOutButton().click()
 })
 
 Then('Validate the total prices', () =>
@@ -56,19 +60,19 @@ Then('select the country submit and verfify Thankyou', () =>
 
 When('I fill the form details', function() 
 {
-    homepage.getEditBox().type(this.data.name)
-    homepage.getGender().select(this.data.gender)
+    homePage.getEditBox().type(this.data.name)
+    homePage.getGender().select(this.data.gender)
 })
 
 Then('validate the forms behaviour', function() 
 {
-    homepage.getTwoWayDataBinding().should('have.value', this.data.name)
-    homepage.getEditBox().should('have.attr','minlength','2')
-    homepage.getEntreprenuer().should('be.disabled')
+    homePage.getTwoWayDataBinding().should('have.value', this.data.name)
+    homePage.getEditBox().should('have.attr','minlength','2')
+    homePage.getEntreprenuer().should('be.disabled')
     Cypress.config('defaultCommandTimeout', 8000)
 })
 
 Then('select the Shop page', () => 
 {
-    homepage.getShopTab().click()
+    homePage.getShopTab().click()
 })
