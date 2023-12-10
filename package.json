@@ -9,12 +9,19 @@
     "chromeTest": "npm run test -- --browser chorme",
     "recordDashBoardTest": "npm run test --record --key 2d4b063c-7676-40f6-86f6-808e3e27007e --reporter mochawesome"
   },
+  "cypress-cucumber-preprocessor": {
+    "json": {
+      "enabled": true,
+      "output": "cypress/cucmberReports/results.json"
+    }
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.6.1",
     "cypress-iframe": "^1.0.1",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "multiple-cucumber-html-reporter": "^3.5.0"
   },
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^19.2.0",
