@@ -63,15 +63,24 @@ Then('select the country submit and verfify Thankyou', () =>
     })
 })
 
-When('I fill the form details', function() 
+//When('I fill the form details', function() 
+//{
+//    homePage.getEditBox().type(this.data.name)
+//    homePage.getGender().select(this.data.gender)
+//})
+
+// creating step defination using dataTable feature
+When('I fill the form details', function(dataTable) 
 {
-    homePage.getEditBox().type(this.data.name)
-    homePage.getGender().select(this.data.gender)
+    name = dataTable.rawTable[1][0]
+    homePage.getEditBox().type(dataTable.rawTable[1][0])
+    homePage.getGender().select(dataTable.rawTable[1][1])
 })
 
 Then('validate the forms behaviour', function() 
 {
-    homePage.getTwoWayDataBinding().should('have.value', this.data.name)
+    //homePage.getTwoWayDataBinding().should('have.value', this.data.name)
+    homePage.getTwoWayDataBinding().should('have.value', name)
     homePage.getEditBox().should('have.attr','minlength','2')
     homePage.getEntreprenuer().should('be.disabled')
     Cypress.config('defaultCommandTimeout', 8000)
