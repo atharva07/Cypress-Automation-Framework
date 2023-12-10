@@ -1,15 +1,18 @@
 import { DataTable, Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
-import HomePage from '../../integration/pageObjects/HomePage';
-import ProductPage from '../../integration/pageObjects/ProductPage';
+//import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import HomePage from '../../../../support/pageObjects/HomePage'
+import ProductPage from '../../../../support/pageObjects/ProductPage'
 
 const homePage=new HomePage()
 const productPage=new ProductPage()
+let name
 Given('I open Ecommerce page', () =>
 {
     cy.visit(Cypress.env("url")+'/angularpractice/')
 })
 
-When('I add items to cart', () => 
+// when I add items to the cart
+When('I add Items to cart', function()
 {
     homePage.getShopTab().click()
     this.data.productName.forEach(function(element) {
@@ -19,8 +22,10 @@ When('I add items to cart', () =>
     productPage.getCheckOutButton().click()
 })
 
+// validate the total price
 Then('Validate the total prices', () =>
 {
+    var sum = 0
     cy.get("tr td:nth-child(4) strong").each(($el, index, $list) => {
         const actualPrice = $el.text()
         var res = actualPrice.split(" ")

@@ -14,4 +14,4 @@ Feature: End To End Ecommerce validation
     Then validate the forms behaviour
     And select the Shop page
 
-    
+
