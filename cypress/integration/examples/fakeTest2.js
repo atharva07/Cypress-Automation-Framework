@@ -22,6 +22,5 @@ describe('My second back-end testing case', function()
         cy.wait('@dummyurl')
 
         // length of the response array = rows of the table
-
     })
 })
