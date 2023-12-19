@@ -21,7 +21,8 @@
     "cypress": "^13.6.1",
     "cypress-iframe": "^1.0.1",
     "mocha": "^10.2.0",
-    "multiple-cucumber-html-reporter": "^3.5.0"
+    "multiple-cucumber-html-reporter": "^3.5.0",
+    "neat-csv": "5.1.0"
   },
   "dependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^19.2.0",
