@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 const neatCSV = require('neat-csv')
-
+let productName
 describe('JWT Session', () => {
     it('is logged in through local store', async () => 
     {
@@ -16,7 +16,11 @@ describe('JWT Session', () => {
                 }
             })
         })
-
+        // text is not the inbuilt method in Cypress. So we need to resolve the promise.
+        cy.get('.card-body b').eq(1).then(function(ele)
+        {
+            productName = ele.text();
+        })
         cy.get('.card-body button:last-of-type').eq(1).click();
         cy.get('[routerlink*="cart"]').click();
         cy.contains('Checkout').click();
@@ -31,7 +35,7 @@ describe('JWT Session', () => {
         })
         cy.get(".action__submit").click();
         cy.wait(2000)
-        cy.get('.order-summary button').click();
+        //cy.get('.order-summary button').click();
 
         
         cy.readFile(Cypress.config("fileServerFolder")+"/cypress/downloads/order-invoice_atharva.hiwase07.csv")
@@ -39,8 +43,8 @@ describe('JWT Session', () => {
         {
             const csv = await neatCSV(text)
             console.log(csv)
-
+            const actualProductCSV = csv[0]["Product Name"]
+            expect(productName).to.equal(actualProductCSV)
         })
-        
     })
 })
