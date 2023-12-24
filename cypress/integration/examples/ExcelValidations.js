@@ -1,8 +1,7 @@
 /// <reference types="cypress" />
 const neatCSV = require('neat-csv')
 let productName
-const excelToJson = require('convert-excel-to-json');
-const fs = require('fs');
+
 describe('JWT Session', () => {
     it('is logged in through local store', async () => 
     {
@@ -41,11 +40,11 @@ describe('JWT Session', () => {
 
         const filePath = cy.readFile(Cypress.config("fileServerFolder")+"/cypress/downloads/order-invoice_atharva.hiwase07.xlsx")
         // excel to json library is used to read the excel file format.
-        
-        const result = excelToJson({
-        source: fs.readFileSync(filePath) // fs.readFileSync return a Buffer
-        });
-
-        console.log(result);
+        cy.task('excelToJsonConvertor', filePath).then(function(result)
+        {
+            cy.log(result);
+        })
+        // Browser (Engine) - JS code  -> Client side Environment (Front End) - Cypress
+        // Node (Engine) - JS code -> Back End applications/Environment
     })
 })
