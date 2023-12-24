@@ -17,7 +17,6 @@ async function setupNodeEvents(on, config) {
   }
   await preprocessor.addCucumberPreprocessorPlugin(on, config);
   on("file:preprocessor", browserify.default(config));
-
   tasks = sqlServer.loadDBPlugin(config.db);
   on('task', tasks);
 
