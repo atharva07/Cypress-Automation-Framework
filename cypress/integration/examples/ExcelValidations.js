@@ -38,7 +38,7 @@ describe('JWT Session', () => {
         cy.wait(2000)
         cy.get('.order-summary button').contains("Excel").click();
 
-        const filePath = cy.readFile(Cypress.config("fileServerFolder")+"/cypress/downloads/order-invoice_atharva.hiwase07.xlsx")
+        const filePath = Cypress.config("fileServerFolder")+"/cypress/downloads/order-invoice_atharva.hiwase07.xlsx"
         // excel to json library is used to read the excel file format.
         cy.task('excelToJsonConvertor', filePath).then(function(result)
         {
