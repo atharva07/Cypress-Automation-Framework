@@ -42,9 +42,14 @@ describe('JWT Session', () => {
         // excel to json library is used to read the excel file format.
         cy.task('excelToJsonConvertor', filePath).then(function(result)
         {
-            cy.log(result);
+            cy.log(result.data[1].A);
+            expect(productName).to.equal(result.data[1].B);
         })
         // Browser (Engine) - JS code  -> Client side Environment (Front End) - Cypress
+
         // Node (Engine) - JS code -> Back End applications/Environment
+        // Accessing files - fd, Databasesaccess,
+
+        // Task - (Files, DB) -> config.js, (ExcelToJson) -> cy.task(ExcelToJson)
     })
 })
