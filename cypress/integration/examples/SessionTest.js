@@ -45,6 +45,10 @@ describe('JWT Session', () => {
             console.log(csv)
             const actualProductCSV = csv[0]["Product Name"]
             expect(productName).to.equal(actualProductCSV)
+            cy.readFile(filePath).then(function(text)
+            {
+                expect(text).to.include(productName);
+            })
         })
     })
 })

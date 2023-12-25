@@ -51,5 +51,11 @@ describe('JWT Session', () => {
         // Accessing files - fd, Databasesaccess,
 
         // Task - (Files, DB) -> config.js, (ExcelToJson) -> cy.task(ExcelToJson)
+
+        // code to verify if the content is present in the text file. 
+        cy.readFile(filePath).then(function(text)
+        {
+            expect(text).to.include(productName);
+        })
     })
 })
